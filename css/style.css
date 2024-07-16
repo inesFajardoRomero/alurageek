@@ -220,3 +220,8 @@ input:focus{
     width: 24px;
     height: 24px;
 }
+.title_precio{
+    font-weight: 400;
+    font-family: "IBM Plex Mono";
+    font-size: 15px;
+}

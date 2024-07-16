@@ -73,28 +73,37 @@
              { nombre: "Stormtrooper", precio: "$ 60.00" },
         ];
 
-        const productosSeccion = document.getElementById('productosSeccion');
-
-        if (productos.length === 0) {
-            const mensaje = document.createElement('div');
-            mensaje.className = 'mensaje';
-            mensaje.textContent = 'No se han agregado productos';
-            productosSeccion.appendChild(mensaje);
-        } else {
-            productos.forEach(producto => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<div class="text_card"><img class="img_productos" src="assets/img/producto.jpeg" />
-                    <div class="text_descripcion">
-                        <h3>${producto.nombre}</h3>
-                        <div class="text_precio">
-                            <p>${producto.precio}</p>
-                            <p><img class="img_trash" src="assets/img/trashIcon.png" /></p>
-                        </div>
-                    </div>
-                </div>`;
-                productosSeccion.appendChild(card);
-            });
+        getProducto();
+        function getProducto() {
+            const userData = fetch(`http://localhost:3000/productos`)
+            .then(response => response.json())
+            .then(data => {
+                var productos = data;
+                const productosSeccion = document.getElementById('productosSeccion');
+                if (productos.length === 0) {
+                    const mensaje = document.createElement('div');
+                    mensaje.className = 'mensaje';
+                    mensaje.textContent = 'No se han agregado productos';
+                    productosSeccion.appendChild(mensaje);
+                } else {
+                    productos.forEach(producto => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.innerHTML = `<div class="text_card"><img class="img_productos" src="assets/img/producto.jpeg" />
+                            <div class="text_descripcion">
+                                <h3 class="title_precio">${producto.nombre}</h3>
+                                <div class="text_precio">
+                                    <p>$ ${producto.precio}</p>
+                                    <p><img class="img_trash" src="assets/img/trashIcon.png" /></p>
+                                </div>
+                            </div>
+                        </div>`;
+                        productosSeccion.appendChild(card);
+                    });
+                }
+               
+            })
+            .catch(error => console.log(error));
         }
     </script>
 </body>
