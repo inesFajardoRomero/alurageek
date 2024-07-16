@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title> AluraGeek </title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar_container">
+            <img class="img_logo" src="assets/img/corazones.png"/>
+            <h2>AluraGeek</h2> 
+        </div>
+
+    </header>
+    <section class="section">
+        <div class="productos_container">
+            <h3 class="title">Mis Productos:</h3>
+            <div class="lista_productos" id="lista_productos">
+                <div class="productos-seccion" id="productosSeccion">
+                    <!-- Aquí se insertarán las tarjetas de productos o el mensaje de "no se han agregado productos" -->
+                </div>
+            </div>
+        </div>
+        <div class="agregarProductos_container">
+            <h3 class="title">Agregar Producto:</h3>
+            <form class="form_productos">
+                <input class="input_formulario" name="nombre" placeholder="nombre.."/>
+                <input class="input_formulario" name="precio" placeholder="precio.."/>
+                <input class="input_formulario" name="imagen" placeholder="imagen.."/>
+                <div class="botones">
+                    <span class="form_enviar"><a href=""><button class="form_enviar--formulario">Enviar</button></a></span>
+                    <span class="form_limpiar"><a href=""><button class="form_limpiar--formulario">Limpiar</button></a></span>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer_container">
+            <div class="logo_footer">
+                <img class="img_logo" src="assets/img/corazones.png"/>
+                <h2>AluraGeek</h2> 
+            </div>
+           
+            <div class="text_footer">
+                <p class="text_footer_desa">Desarrollado por Inés Janellys Fajardo Romero</p>
+                <p class="text_footer_alura">Alura Latam 2024</p>
+            </div>
+
+
+        </div>
+    </footer>
+
+
+
+    <script>
+        // Simulación de productos (puede estar vacío si no hay productos)
+        const productos = [
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+             { nombre: "Stormtrooper", precio: "$ 60.00" },
+        ];
+
+        const productosSeccion = document.getElementById('productosSeccion');
+
+        if (productos.length === 0) {
+            const mensaje = document.createElement('div');
+            mensaje.className = 'mensaje';
+            mensaje.textContent = 'No se han agregado productos';
+            productosSeccion.appendChild(mensaje);
+        } else {
+            productos.forEach(producto => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<div class="text_card"><img class="img_productos" src="assets/img/producto.jpeg" />
+                    <div class="text_descripcion">
+                        <h3>${producto.nombre}</h3>
+                        <div class="text_precio">
+                            <p>${producto.precio}</p>
+                            <p><img class="img_trash" src="assets/img/trashIcon.png" /></p>
+                        </div>
+                    </div>
+                </div>`;
+                productosSeccion.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
