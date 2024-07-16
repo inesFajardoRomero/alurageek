@@ -36,8 +36,7 @@
                 <input class="input_formulario" name="imagen" data-imagen placeholder="imagen.."/>
                 <div class="botones">
                     <input class="form_enviar--formulario" type="submit" />
-                   
-                    <span class="form_limpiar"><a href=""><button class="form_limpiar--formulario">Limpiar</button></a></span>
+                    <input class="form_limpiar--formulario" type="submit" value="Limpiar"/>
                 </div>
             </form>
         </div>
@@ -61,18 +60,7 @@
 
 
     <script>
-        // Simulación de productos (puede estar vacío si no hay productos)
-        const productos = [
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-             { nombre: "Stormtrooper", precio: "$ 60.00" },
-        ];
+    
 
         getProducto();
         function getProducto() {
@@ -90,7 +78,8 @@
                     productos.forEach(producto => {
                         const card = document.createElement('div');
                         card.className = 'card';
-                        card.innerHTML = `<div class="text_card"><img class="img_productos" src="assets/img/producto.jpeg" />
+                        card.innerHTML = `<div class="text_card"><img class="img_productos" src=
+                            "${producto.imagen}" />
                             <div class="text_descripcion">
                                 <h3 class="title_precio">${producto.nombre}</h3>
                                 <div class="text_precio">
@@ -140,6 +129,16 @@
             const conexionConvertida = await conexion.json();
             return conexionConvertida;
         }
+
+        const img = document.querySelector('img');
+        async function eliminarProductos(id){
+            const conexion= await fetch("http://localhost:3000/productos/" + id,{
+            method:"DELETE"
+            })
+            const conexionConvertida = await conexion.json();
+            return conexionConvertida;
+        }
+        img.addEventListener("click", evento => eliminarProductos(9));
     </script>
 </body>
 </html>
