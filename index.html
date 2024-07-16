@@ -30,12 +30,13 @@
         </div>
         <div class="agregarProductos_container">
             <h3 class="title">Agregar Producto:</h3>
-            <form class="form_productos">
-                <input class="input_formulario" name="nombre" placeholder="nombre.."/>
-                <input class="input_formulario" name="precio" placeholder="precio.."/>
-                <input class="input_formulario" name="imagen" placeholder="imagen.."/>
+            <form class="form_productos"  data-formulario>
+                <input class="input_formulario" name="nombre" data-nombre placeholder="nombre.."/>
+                <input class="input_formulario" name="precio" data-precio placeholder="precio.."/>
+                <input class="input_formulario" name="imagen" data-imagen placeholder="imagen.."/>
                 <div class="botones">
-                    <span class="form_enviar"><a href=""><button class="form_enviar--formulario">Enviar</button></a></span>
+                    <input class="form_enviar--formulario" type="submit" />
+                   
                     <span class="form_limpiar"><a href=""><button class="form_limpiar--formulario">Limpiar</button></a></span>
                 </div>
             </form>
@@ -104,6 +105,40 @@
                
             })
             .catch(error => console.log(error));
+        }
+
+
+        const formulario = document.querySelector('form');
+
+        async function manejarCreacionProductos(evento) {
+            evento.preventDefault();
+            
+            const nombre = document.querySelector("[data-nombre]").value;
+            const precio = document.querySelector("[data-precio]").value;
+            const imagen = document.querySelector("[data-imagen]").value;
+
+            await crearProductos(nombre, precio, imagen);
+            window.location.href = "index.html";
+        }
+
+        formulario.addEventListener("submit", evento => manejarCreacionProductos(evento));
+        
+        
+        async function crearProductos(nombre,precio,imagen){
+            const conexion= await fetch("http://localhost:3000/productos",{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json",
+            },
+                body:JSON.stringify({
+                    id:1,
+                    nombre:nombre,
+                    imagen:imagen,
+                    precio:precio
+                })
+            })
+            const conexionConvertida = await conexion.json();
+            return conexionConvertida;
         }
     </script>
 </body>
